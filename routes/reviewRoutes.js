@@ -1,0 +1,29 @@
+const express = require('express');
+const reviewController = require('../controllers/reviewController');
+const authController = require('../controllers/authController');
+
+//Nested routes
+const router = express.Router({ mergeParams: true });
+
+router.use(authController.protect);
+
+router.route('/').get(reviewController.getAllReviews).post(
+  authController.restrictTo('user'),
+  reviewController.setUserTourIds, //getting tour id from the params if not mentioned
+  reviewController.checkTourBooked,
+  reviewController.createReviewTour
+);
+
+router
+  .route('/:id')
+  .get(reviewController.getReview)
+  .patch(
+    authController.restrictTo('admin', 'user'),
+    reviewController.updateReview
+  )
+  .delete(
+    authController.restrictTo('admin', 'user'),
+    reviewController.deleteReview
+  );
+
+module.exports = router;
