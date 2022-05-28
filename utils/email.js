@@ -20,8 +20,8 @@ module.exports = class Email {
         service: 'sendGrid',
 
         auth: {
-          user: process.env.SENDGRID_USERNAME,
-          pass: process.env.SENDGRID_PASSWORD,
+          user: process.env.SENDGRID_USERNAME, //not generated yet
+          pass: process.env.SENDGRID_PASSWORD, //not generated yet
         },
       });
     }
