@@ -15,6 +15,7 @@ const userRouter = require('./routes/userRoutes');
 const reviewRouter = require('./routes/reviewRoutes');
 const bookingRouter = require('./routes/bookingRoutes');
 const viewRouter = require('./routes/viewRoutes');
+const compression = require('compression');
 
 const app = express();
 
@@ -73,6 +74,8 @@ app.use(
     ],
   })
 );
+
+app.use(compression());
 
 //Middleware only works if declared before the route hadlers
 // test headers

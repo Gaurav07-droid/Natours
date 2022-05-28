@@ -171,11 +171,11 @@ tourSchema.pre(/^find/, function (next) {
   next();
 });
 
-tourSchema.post(/^find/, function (docs, next) {
-  console.log(`Query took ${Date.now() - this.start} milsecs `);
-  // console.log(docs); //result your are getting
-  next();
-});
+// tourSchema.post(/^find/, function (docs, next) {
+//   console.log(`Query took ${Date.now() - this.start} milsecs `);
+//   // console.log(docs); //result your are getting
+//   next();
+// });
 
 //populating user through child referencing //find is query middleware
 tourSchema.pre(/^find/, function (next) {
