@@ -31,7 +31,7 @@ mongoose
 //describing schema for our data in tour model
 
 const port = process.env.PORT || 3000;
-const server = app.listen(process.env.PORT, () => {
+const server = app.listen(port, () => {
   console.log(`App is running on ${port}...`);
 });
 
