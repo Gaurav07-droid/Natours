@@ -16,6 +16,7 @@ const reviewRouter = require('./routes/reviewRoutes');
 const bookingRouter = require('./routes/bookingRoutes');
 const viewRouter = require('./routes/viewRoutes');
 const compression = require('compression');
+const cors = require('cors');
 
 const app = express();
 
@@ -25,6 +26,16 @@ app.set('view engine', 'pug');
 app.set('views', path.join(__dirname, 'views'));
 
 //Global MIDDLEWARES
+//allow control-allow-oriign-resource-sharing for all request
+app.use(cors());
+//if frontend is on another side
+// app.user(cors(){
+//   origin:
+// })
+
+app.options('*', cors());
+// app.options('/api/v1/tours/:id', cors());
+
 //serving static files
 app.use(express.static(path.join(__dirname, 'public')));
 
