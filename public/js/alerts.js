@@ -6,7 +6,7 @@ const hideAlert = () => {
 };
 
 //type ?success:error
-export const showAlerts = (type, mssg) => {
+export const showAlerts = (type, mssg, time = 7) => {
   //fisrt hide all alerts
   hideAlert();
 
@@ -14,5 +14,5 @@ export const showAlerts = (type, mssg) => {
 
   document.querySelector('body').insertAdjacentHTML('afterbegin', markup);
 
-  window.setTimeout(hideAlert, 5000);
+  window.setTimeout(hideAlert, time * 1000);
 };
