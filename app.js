@@ -61,7 +61,13 @@ const limiter = rateLimit({
   message: 'Too many request from this IP,Please try again in an hour!',
 });
 
-app.use(limiter);
+app.use('/api', limiter);
+
+app.post(
+  '/webhook-checkout',
+  express.raw({ type: 'application/json' }),
+  bookingController.webhookCheckout
+);
 
 //Body parser reading data from body ito req.body
 app.use(express.json({ limit: '10kb' })); //limiting data size
@@ -97,12 +103,6 @@ app.use((req, res, next) => {
   // console.log(req.cookies);  shows the cookie which are in the browser
   next();
 });
-
-app.post(
-  '/webhook-checkout',
-  express.raw({ type: 'application/json' }),
-  bookingController.webhookCheckout
-);
 
 //ROUTES
 app.use('/', viewRouter);
