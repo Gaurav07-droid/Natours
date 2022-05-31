@@ -4,8 +4,7 @@ import { login, logout } from './login';
 import { displayMap } from './mapbox';
 import { bookTour } from './stripe';
 import { updateSettings } from './updateSettings';
-import { showAlerts } from './alerts';
-
+import showAlerts from './alerts';
 //dom elemets
 const mapBox = document.getElementById('map');
 const logoutbtn = document.querySelector('.nav__el--logout');
