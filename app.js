@@ -14,6 +14,7 @@ const tourRouter = require('./routes/tourRoutes');
 const userRouter = require('./routes/userRoutes');
 const reviewRouter = require('./routes/reviewRoutes');
 const bookingRouter = require('./routes/bookingRoutes');
+const bookingController = require('./controllers/bookingController');
 const viewRouter = require('./routes/viewRoutes');
 const compression = require('compression');
 const cors = require('cors');
@@ -96,6 +97,12 @@ app.use((req, res, next) => {
   // console.log(req.cookies);  shows the cookie which are in the browser
   next();
 });
+
+app.post(
+  '/webhook-checkout',
+  express.raw({ type: 'application/json' }),
+  bookingController.webhookCheckout
+);
 
 //ROUTES
 app.use('/', viewRouter);
