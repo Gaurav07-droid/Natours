@@ -14,7 +14,7 @@ exports.setUserTourIds = (req, res, next) => {
 exports.checkTourBooked = catchAsync(async (req, res, next) => {
   const currentTour = req.params.tourId;
   const currentUser = req.user.id;
-  console.log(currentTour, currentUser);
+  // console.log(currentTour, currentUser);
   // const tourBooked = await Booking.find({ tour: currentTour });
   if (
     !(await Booking.findOne({ tour: currentTour })) ||

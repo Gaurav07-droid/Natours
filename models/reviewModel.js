@@ -1,38 +1,39 @@
 const mongoose = require('mongoose');
 const Tour = require('./tourModel');
 
-const reviewSchema = new mongoose.Schema({
-  review: {
-    type: String,
-    minLength: [3, 'A review must not be more than 50 characters long'],
-    required: [true, `Review can't be empty`],
+const reviewSchema = new mongoose.Schema(
+  {
+    review: {
+      type: String,
+      minLength: [3, 'A review must not be more than 50 characters long'],
+      required: [true, `Review can't be empty`],
+    },
+
+    rating: {
+      type: Number,
+      min: [1, 'Rating must be between 1 and 5'],
+      max: [5, 'Rating must be between 1 and 5'],
+    },
+
+    createdAt: { type: Date, default: Date.now() },
+
+    tour: {
+      type: mongoose.Schema.ObjectId,
+      ref: 'Tour',
+      required: [true, 'Review must belong to a tour'],
+    },
+
+    user: {
+      type: mongoose.Schema.ObjectId,
+      ref: 'User',
+      required: [true, 'Review must belong to a user.'],
+    },
   },
-
-  rating: {
-    type: Number,
-    min: [1, 'Rating must be between 1 and 5'],
-    max: [5, 'Rating must be between 1 and 5'],
-  },
-
-  createdAt: { type: Date, default: Date.now() },
-
-  tour: {
-    type: mongoose.Schema.ObjectId,
-    ref: 'Tour',
-    required: [true, 'Review must belong to a tour'],
-  },
-
-  user: {
-    type: mongoose.Schema.ObjectId,
-    ref: 'User',
-    required: [true, 'Review must belong to a user.'],
-  },
-});
-
-reviewSchema.set({
-  toJSON: { virtuals: true },
-  toObject: { virtuals: true },
-});
+  {
+    toJSON: { virtuals: true },
+    toObject: { virtuals: true },
+  }
+);
 
 //preventing multiple review from one  user using indexes
 reviewSchema.index({ tour: 1, user: 1 }, { unique: true });
